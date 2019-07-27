@@ -36,3 +36,14 @@ The train.m file borrows heavily from the "train.py" file in the TensorFlow exam
   
   <Subheading> Make the repository on ECR 
   ECR is AWS's Docker image Repository service. 
+
+<subheading> Upload your image to ECR
+  -Tag the image with the repo name you just made
+  -Login to AWS through the CLI
+  -Upload the image
+  
+  <Heading> Prepare S3
+  S3 is one of AWS's data-storage solutions. This is where our input data lives and where the outputs will get written to.
+  
+  <Heading> Execute your Code
+  There are two ways of doing this through SageMaker: Training Jobs through the web interface
