@@ -46,4 +46,7 @@ The train.m file borrows heavily from the "train.py" file in the TensorFlow exam
   S3 is one of AWS's data-storage solutions. This is where our input data lives and where the outputs will get written to.
   
   <Heading> Execute your Code
-  There are two ways of doing this through SageMaker: Training Jobs through the web interface
+  There are two ways of doing this through SageMaker: through the web interface for initiating Training Jobs, and through SageMaker's Jupyter Notebooks.
+  <subheading> Web Interface
+    
+  <subheading> Jupyter Notebook
