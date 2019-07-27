@@ -18,6 +18,8 @@ For the purpose of this overview, Docker containers are self-contained images th
   
   On the backend, AWS does something like:
   docker run -v /{ml data}:/opt/ml/ my_image train
+  
+  The mount command (-v) establishes a connection between the two directories; anything that is on the host {ml data} folder will be available to the container, and any data that gets written to that folder will be available to the host. A very important aspect of how this works within Docker is that it will overwrite anything you have 
 
 <Heading > MATLAB Executable
 The train.m file borrows heavily from the "train.py" file in the TensorFlow example from AWS. 
