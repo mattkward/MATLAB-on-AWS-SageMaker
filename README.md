@@ -11,6 +11,7 @@ AWS Services (AWS Command Line Interface, SageMaker, S3, ECR, etc.?)
 
 Useful resources include:
 <AWS bring your own TensorFlow example>
+  https://github.com/awslabs/amazon-sagemaker-examples/tree/master/advanced_functionality/tensorflow_bring_your_own
 
 
 <Heading> Docker and AWS
