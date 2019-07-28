@@ -1,0 +1,1 @@
+Make this folder and put the MyAppInstaller_mcr.install file here. This file is located in the "for_redistribution" folder of the Compiler output, and should be about 266 MB. I believe this is the "numerics only" installer, which is smaller than the full Matlab Runtime, so it may make sense to use a different installer (or install the full MRE) if your application requires it.
