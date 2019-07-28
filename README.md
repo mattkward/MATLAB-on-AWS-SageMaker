@@ -28,9 +28,7 @@ My example code here is very simple. The train.m is the "master" file that borro
   -execute the actual algorithm/important part
   -write the data
 There are at least two different Matlab Runtime Environments that exist: one that includes "all" of Matlab's functionality and another that has just the "numerics" capability. For my purposes I only needed the numerics, and the only way to get this is to select the "Runtime included in package" option at the top of the compiler window, and then use the installer that includes that runtime in the Docker image (by default it's found in the "for_redistribution" folder and is titled MyAppInstaller_mcr.install).
-
-The train.m file borrows heavily from the "train.py" file in the TensorFlow example from AWS. 
-  
+ 
   
   <Heading> Dockerfile
   Dockerfiles have all the instructions for creating an Image.
@@ -64,10 +62,13 @@ The train.m file borrows heavily from the "train.py" file in the TensorFlow exam
   
   
   <Heading> Prepare S3
-  S3 is one of AWS's data-storage solutions. This is where our input data lives and where the outputs will get written to.
+  S3 is one of AWS's data-storage solutions. This is where our input data lives and where the outputs will get written to. 
   
   <Heading> Execute your Code
   There are two ways of doing this through SageMaker: through the web interface for initiating Training Jobs, and through SageMaker's Jupyter Notebooks.
+  <subheading> Role
+    AWS Manages permissions across their platform through the use of "roles". When you execute a training job on SageMaker with a role, that role needs to have access to the S3 data. 
+  
   <subheading> Web Interface
     
   <subheading> Jupyter Notebook
