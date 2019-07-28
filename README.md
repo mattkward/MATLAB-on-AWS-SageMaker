@@ -27,7 +27,7 @@ My example code here is very simple. The train.m is the "master" file that borro
   -read the data in
   -execute the actual algorithm/important part
   -write the data
-
+There are at least two different Matlab Runtime Environments that exist: one that includes "all" of Matlab's functionality and another that has just the "numerics" capability. For my purposes I only needed the numerics, and the only way to get this is to select the "Runtime included in package" option at the top of the compiler window, and then use the installer that includes that runtime in the Docker image (by default it's found in the "for_redistribution" folder and is titled MyAppInstaller_mcr.install).
 
 The train.m file borrows heavily from the "train.py" file in the TensorFlow example from AWS. 
   
@@ -42,14 +42,26 @@ The train.m file borrows heavily from the "train.py" file in the TensorFlow exam
     -Make sure to include the Runtime in the executable
     
   <subheading> Build your Docker Image
+  Make a folder that will have your Dockerfile and install files
   
   <Subheading> Make the repository on ECR 
-  ECR is AWS's Docker image Repository service. 
+  ECR is AWS's Docker image Repository service. Log in to the service and create a repo; it should have a name like:
+  <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
 
 <subheading> Upload your image to ECR
   -Tag the image with the repo name you just made
+  You need to tag the image with the same name as the repo you just created. Do this by running:
+  >> docker tag <image_name> <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
+  
   -Login to AWS through the CLI
+  Run:
+  >> aws ecr get-login --region us-west-1 --no-include-email
+  This will spit out a huge wall of text that's actually a command that establishes a connection to AWS. Copy that output, paste the output back into the terminal, and run the command.
+  
   -Upload the image
+  With the image tagged and AWS connection made, you can upload the image to ECR by running:
+  >> docker push <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
+  
   
   <Heading> Prepare S3
   S3 is one of AWS's data-storage solutions. This is where our input data lives and where the outputs will get written to.
