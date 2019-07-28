@@ -59,3 +59,6 @@ The train.m file borrows heavily from the "train.py" file in the TensorFlow exam
   <subheading> Web Interface
     
   <subheading> Jupyter Notebook
+  
+  <Heading> Finding the results
+  The output of the algorithms are written to the S3 output folder you specify. To get your data, navigate over to the appropriate folder in the S3 bucket you specified when the training job was started.
