@@ -29,7 +29,8 @@ COPY /InstallFile/ /mcr-install
 
 RUN ./mcr-install/MyAppInstaller_mcr.install -agreeToLicense yes -mode silent -destinationFolder /mcr
 
-# move the application from the default folder over to /opt/program. This can likely be moved somewhere else, but be sure to set the WORKDIR appropriately
+# move the application from the default folder over to /opt/program. This can likely be moved somewhere else, 
+# but be sure to set the WORKDIR appropriately
 RUN cd /mcr/application && \
     mv train /opt/program
 
