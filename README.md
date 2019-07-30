@@ -86,5 +86,37 @@ AWS Manages permissions across their platform through the use of "roles". When y
     
   ## Jupyter Notebook
   
+''' 
+import boto3
+import re
+
+import os
+import numpy as np
+import pandas as pd
+from sagemaker import get_execution_role
+
+role = get_execution_role()
+
+import sagemaker as sage
+from time import gmtime, strftime
+
+sess = sage.Session()
+
+account = sess.boto_session.client('sts').get_caller_identity()['Account']
+print(role)
+region = sess.boto_session.region_name
+image = '{aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}'.format(account, region)
+        
+matlabHelloWorld = sage.estimator.Estimator(image,
+                       role, 1, 'ml.m5.large',
+                       output_path="s3://{s3 bucket name}/{s3 output folder}/".format(sess.default_bucket()),
+                       sagemaker_session=sess)
+
+print(sess.default_bucket())
+
+matlabHelloWorld.fit("s3://{s3 input data bucket}/")
+
+'''
+  
   # Finding the results
 The output of the algorithms are written to the S3 output folder you specify. To get your data, navigate over to the appropriate folder in the S3 bucket you specified when the training job was started.
