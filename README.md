@@ -19,12 +19,8 @@ For the purpose of this overview, Docker containers are self-contained images th
   
   On the backend, AWS does something like:
   
-docker run -v /{ml data}:/opt/ml/{something} my_image train
-
     docker run -v /{ml data}:/opt/ml/{something} my_image train
     
-'docker run -v /{ml data}:/opt/ml/{something} my_image train'
-
   
   The mount command (-v) establishes a connection between the two directories; anything that is on the host {ml data} folder will be available to the container, and any data that gets written to that folder will be available to the host. A very important aspect of how this works within Docker is that it will overwrite anything you have in the /opt/ml/{something} folder, so don't put anything in there that you'll need for execution.
 
@@ -39,6 +35,8 @@ There are at least two different Matlab Runtime Environments that exist: one tha
   # Dockerfile
   Dockerfiles have all the instructions for creating an Image.
   Big Things:
+ -Set MATLAB environment variable
+ -Make the working directory the same as where you copy your executable
   
   
 # Getting your code on AWS
@@ -50,11 +48,13 @@ There are at least two different Matlab Runtime Environments that exist: one tha
   
   ## Make the repository on ECR 
   ECR is AWS's Docker image Repository service. Log in to the service and create a repo; it should have a name like:
-  {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/<repo name>
+  
+    {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/<repo name>
 
 ## Upload your image to ECR
   -Tag the image with the repo name you just made
   You need to tag the image with the same name as the repo you just created. Do this by running:
+      
       docker tag {image_name} {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}
   
   ### Login to AWS through the CLI
@@ -64,7 +64,8 @@ There are at least two different Matlab Runtime Environments that exist: one tha
   
   ### Upload the image
   With the image tagged and AWS connection made, you can upload the image to ECR by running:
-  >> docker push <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
+    
+    docker push {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}
   
   # Prepare S3
   S3 is one of AWS's data-storage solutions. This is where our input data lives and where the outputs will get written to. 
