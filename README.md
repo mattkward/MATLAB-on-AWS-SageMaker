@@ -63,7 +63,7 @@ There are at least two different Matlab Runtime Environments that exist: one tha
   ### Tag the image with the repo name you just made
   You need to tag the image with the same name as the repo you just created. Do this by running:
       
-      docker tag {image_name} {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}
+      docker tag image_name {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}
   
   ### Login to AWS through the CLI
   In the terminal, run the following command:
@@ -87,9 +87,17 @@ AWS Manages permissions across their platform through the use of "roles". When y
 
 ![Image of IAM Role with S3 Access](https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/screenshots/iam%20role.JPG)
 
+You can create this role when starting a Training job in the next step.
   
   ## Web Interface
+Setting up your training job through the web interface is fairly straightforward. On the left hand side under Training, select Training Jobs, then the orange "Create training job" button in the top-right. Give your training job a unique name and select the IAM role that has access to S3. For the Algorithm Source, select "Your own algorithm container in ECR", then provide the link ({aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}). For Input mode select File, and for Instance type I used ml.m4.xlarge.
 
+Since this is a Training job, the Input data configuration should have "train" populated with "train" in the Channel name. I don't know what Record wrapper, S3 data type, or S3 data distribution type are, so I left them at their defaults. S3 location is the location of your data, so make sure to put this in. It should look something like: s3://bucket/path-to-your-input-data/
+
+In the Output data configuration, put the S3 location where you want to write your data, and it should look like: s3://bucket/path-to-your-output-data/
+Note: Make sure you include the / at the end of the output folder. I didn't and S3 wouldn't show my data.
+
+Finally, select Create training job to kick it off.
 
   ## Jupyter Notebook
   The code below is adapted from other AWS examples. Simply update the image string, output path, and input path.
