@@ -85,7 +85,7 @@ S3 is one of AWS's data-storage solutions. This is where our input data lives an
   ## Role
 AWS Manages permissions across their platform through the use of "roles". When you execute a training job on SageMaker with a role, that role needs to have access to the S3 data. You'll have different options depending on what your use case is, as shown below:
 
-![Image of IAM Role with S3 Access] (https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/iam%20role.JPG)
+![Image of IAM Role with S3 Access](https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/iam%20role.JPG)
 
   
   ## Web Interface
