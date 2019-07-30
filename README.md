@@ -44,12 +44,12 @@ There are at least two different Matlab Runtime Environments that exist: one tha
   
   ## Make the repository on ECR 
   ECR is AWS's Docker image Repository service. Log in to the service and create a repo; it should have a name like:
-  <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
+  {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/<repo name>
 
 ## Upload your image to ECR
   -Tag the image with the repo name you just made
   You need to tag the image with the same name as the repo you just created. Do this by running:
-      docker tag <image_name> <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
+      docker tag {image_name} {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}
   
   ### Login to AWS through the CLI
   Run:
