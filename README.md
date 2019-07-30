@@ -86,7 +86,8 @@ AWS Manages permissions across their platform through the use of "roles". When y
     
   ## Jupyter Notebook
   
-''' 
+``` 
+
 import boto3
 import re
 
@@ -116,7 +117,11 @@ print(sess.default_bucket())
 
 matlabHelloWorld.fit("s3://{s3 input data bucket}/")
 
-'''
+```
+
+
+
+fjdaklf;dsajkl
   
   # Finding the results
 The output of the algorithms are written to the S3 output folder you specify. To get your data, navigate over to the appropriate folder in the S3 bucket you specified when the training job was started.
