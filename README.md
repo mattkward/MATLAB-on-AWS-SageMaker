@@ -24,7 +24,8 @@ For the purpose of this overview, Docker containers are self-contained images th
   
   The mount command (-v) establishes a connection between the two directories; anything that is on the host {ml data} folder will be available to the container, and any data that gets written to that folder will be available to the host. A very important aspect of how this works within Docker is that it will overwrite anything you have in the /opt/ml/ folder, so don't put anything in there that you'll need for execution.
 
-# MATLAB Executable
+# Preparing your code locally
+## MATLAB Executable
 My example code here is very simple. The train.m is the "master" file that borrows heavily from the train.py file in the TensorFlow example, and does the following:
 
   * Read the data in
@@ -34,8 +35,8 @@ My example code here is very simple. The train.m is the "master" file that borro
 There are at least two different Matlab Runtime Environments that exist: one that includes "all" of MATLAB's functionality and another that has just the "numerics" capability. For my purposes I only needed the numerics, and the only way to get this is to select the "Runtime included in package" option at the top of the compiler window, and then use the installer that includes that runtime in the Docker image (by default it's found in the "for_redistribution" folder and is titled MyAppInstaller_mcr.install).
  
   
-# Build your Docker Image
-   ## Generate your executable using the Compiler Toolbox, and put it in the right folder
+## Build your Docker Image
+   ### Generate your executable using the Compiler Toolbox, and put it in the right folder
   Make sure to include the Runtime in the executable
   
   Dockerfiles have all the instructions for creating an Image. The "big" things this Dockerfile needs to do include:
@@ -46,7 +47,7 @@ There are at least two different Matlab Runtime Environments that exist: one tha
 
  
     
-  ## Build your Docker Image
+  ### Build your Docker Image
   Make a folder that will have your Dockerfile and install files
   Something like:
   
@@ -54,11 +55,13 @@ There are at least two different Matlab Runtime Environments that exist: one tha
 
 # Getting your code on AWS
   ## Make the repository on ECR 
-  ECR is AWS's Docker image Repository service. Log in to the service and create a repo; it should have a name like:
+  ECR is AWS's Docker image Repository service. When you create a repository, it will have a name you give it, and then a URI which is very important for the subsequent steps. The URI will look something like:
   
     {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}
 
 ## Upload your image to ECR
+Once the repo is created on ECR and the image is created on your local machine, you can push the image up to AWS.
+
   ### Tag the image with the repo name you just made
   You need to tag the image with the same name as the repo you just created. Do this by running:
       
@@ -137,3 +140,4 @@ matlabHelloWorld.fit("s3://{s3 input data bucket}/")
   
   # Finding the results
 The output of the algorithms are written to the S3 output folder you specify. To get your data, navigate over to the appropriate folder in the S3 bucket you specified when the training job was started.
+
