@@ -38,10 +38,9 @@ There are at least two different Matlab Runtime Environments that exist: one tha
    ## Generate your executable using the Compiler Toolbox, and put it in the right folder
   Make sure to include the Runtime in the executable
   
-  Dockerfiles have all the instructions for creating an Image.
-  Big Things:
- -Set MATLAB environment variable
- -Make the working directory the same as where you copy your executable
+  Dockerfiles have all the instructions for creating an Image. The "big" things this Dockerfile needs to do include:
+  * Set MATLAB environment variable
+  * Make the working directory the same as where you copy your executable
   
   
 
