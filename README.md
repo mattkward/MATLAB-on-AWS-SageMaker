@@ -14,7 +14,7 @@ Useful resources include:
   https://github.com/awslabs/amazon-sagemaker-examples/tree/master/advanced_functionality/tensorflow_bring_your_own
 
 
-<Heading> Docker and AWS
+# Docker and AWS
 For the purpose of this overview, Docker containers are self-contained images that have everything required for executing code, including OS and supporting libraries. Because of this, containers are very portable and can be used for a number of different use cases.
   
   On the backend, AWS does something like:
@@ -22,7 +22,7 @@ For the purpose of this overview, Docker containers are self-contained images th
   
   The mount command (-v) establishes a connection between the two directories; anything that is on the host {ml data} folder will be available to the container, and any data that gets written to that folder will be available to the host. A very important aspect of how this works within Docker is that it will overwrite anything you have in the /opt/ml/{something} folder, so don't put anything in there that you'll need for execution.
 
-<Heading > MATLAB Executable
+# MATLAB Executable
 My example code here is very simple. The train.m is the "master" file that borrows heavily from the train.py file in the TensorFlow example, and does the following:
   -read the data in
   -execute the actual algorithm/important part
@@ -30,23 +30,23 @@ My example code here is very simple. The train.m is the "master" file that borro
 There are at least two different Matlab Runtime Environments that exist: one that includes "all" of Matlab's functionality and another that has just the "numerics" capability. For my purposes I only needed the numerics, and the only way to get this is to select the "Runtime included in package" option at the top of the compiler window, and then use the installer that includes that runtime in the Docker image (by default it's found in the "for_redistribution" folder and is titled MyAppInstaller_mcr.install).
  
   
-  <Heading> Dockerfile
+  # Dockerfile
   Dockerfiles have all the instructions for creating an Image.
   Big Things:
   
   
-  <Heading> Getting your code on AWS
-  <subheading> Generate your executable using the Compiler Toolbox, and put it in the right folder
+# Getting your code on AWS
+  ## Generate your executable using the Compiler Toolbox, and put it in the right folder
     -Make sure to include the Runtime in the executable
     
-  <subheading> Build your Docker Image
+  ## Build your Docker Image
   Make a folder that will have your Dockerfile and install files
   
-  <Subheading> Make the repository on ECR 
+  ## Make the repository on ECR 
   ECR is AWS's Docker image Repository service. Log in to the service and create a repo; it should have a name like:
   <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
 
-<subheading> Upload your image to ECR
+## Upload your image to ECR
   -Tag the image with the repo name you just made
   You need to tag the image with the same name as the repo you just created. Do this by running:
   >> docker tag <image_name> <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
