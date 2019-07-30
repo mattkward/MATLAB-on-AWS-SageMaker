@@ -4,13 +4,13 @@ This Repo provides an approach for executing MATLAB stand-alone executables on A
 
 Software used:
 * Ubuntu
-* MATLAB 20189ab
+* MATLAB 2018b
 * Compiler Toolbox
 * Docker
 * AWS Services (AWS Command Line Interface, SageMaker, S3, ECR, etc.?)
 
 Useful resources include:
-<AWS bring your own TensorFlow example>
+AWS bring your own TensorFlow example:
   https://github.com/awslabs/amazon-sagemaker-examples/tree/master/advanced_functionality/tensorflow_bring_your_own
 
 
@@ -50,7 +50,8 @@ There are at least two different Matlab Runtime Environments that exist: one tha
   ## Build your Docker Image
   Make a folder that will have your Dockerfile and install files
   Something like:
-      docker built -image_name .
+  
+      docker build -t image_name .
 
 # Getting your code on AWS
   ## Make the repository on ECR 
@@ -82,11 +83,15 @@ S3 is one of AWS's data-storage solutions. This is where our input data lives an
   # Execute your Code
   There are two ways of doing this through SageMaker: through the web interface for initiating Training Jobs, and through SageMaker's Jupyter Notebooks.
   ## Role
-AWS Manages permissions across their platform through the use of "roles". When you execute a training job on SageMaker with a role, that role needs to have access to the S3 data. 
+AWS Manages permissions across their platform through the use of "roles". When you execute a training job on SageMaker with a role, that role needs to have access to the S3 data. You'll have different options depending on what your use case is, as shown below:
+
+
   
   ## Web Interface
-    
+
+
   ## Jupyter Notebook
+  The code below is adapted from other AWS examples. Simply update the image string, output path, and input path.
   
 ``` 
 
@@ -121,9 +126,6 @@ matlabHelloWorld.fit("s3://{s3 input data bucket}/")
 
 ```
 
-
-
-fjdaklf;dsajkl
   
   # Finding the results
 The output of the algorithms are written to the S3 output folder you specify. To get your data, navigate over to the appropriate folder in the S3 bucket you specified when the training job was started.
