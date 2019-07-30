@@ -24,7 +24,7 @@ RUN apt-get -qq update && apt-get -qq install -y \
     mkdir /mcr && \
     cd /mcr-install
 
-# Copy the contents from the InstallFile folder on the host machine to the /mcr-install folder in the image and install
+# Copy the contents from the InstallFile folder from the host machine to the /mcr-install folder in the image and install
 COPY /InstallFile/ /mcr-install
 
 RUN ./mcr-install/MyAppInstaller_mcr.install -agreeToLicense yes -mode silent -destinationFolder /mcr
