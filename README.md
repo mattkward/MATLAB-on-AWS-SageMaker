@@ -49,6 +49,8 @@ There are at least two different Matlab Runtime Environments that exist: one tha
     
   ## Build your Docker Image
   Make a folder that will have your Dockerfile and install files
+  Something like:
+      docker built -image_name .
 
 # Getting your code on AWS
   ## Make the repository on ECR 
