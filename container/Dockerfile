@@ -45,5 +45,5 @@ ENV XAPPLRESDIR=/mcr/v95/X11/app-defaults
 ENV LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCR_ROOT}/runtime/glnxa64:${MCR_ROOT}/bin/glnxa64:${MCR_ROOT}/sys/os/glnxa64:${MCR_ROOT}/sys/opengl/lib/glnxa64
 ENV PATH="/opt/program:${PATH}"
 
-% Set the working directory to where "train" was placed
+# Set the working directory to where "train" was placed
 WORKDIR /opt/program
