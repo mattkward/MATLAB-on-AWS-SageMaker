@@ -19,10 +19,10 @@ For the purpose of this overview, Docker containers are self-contained images th
   
   On the backend, AWS does something like:
   
-    docker run -v /{ml data}:/opt/ml/{something} my_image train
+    docker run -v /{ml data}:/opt/ml/ my_image train
     
   
-  The mount command (-v) establishes a connection between the two directories; anything that is on the host {ml data} folder will be available to the container, and any data that gets written to that folder will be available to the host. A very important aspect of how this works within Docker is that it will overwrite anything you have in the /opt/ml/{something} folder, so don't put anything in there that you'll need for execution.
+  The mount command (-v) establishes a connection between the two directories; anything that is on the host {ml data} folder will be available to the container, and any data that gets written to that folder will be available to the host. A very important aspect of how this works within Docker is that it will overwrite anything you have in the /opt/ml/ folder, so don't put anything in there that you'll need for execution.
 
 # MATLAB Executable
 My example code here is very simple. The train.m is the "master" file that borrows heavily from the train.py file in the TensorFlow example, and does the following:
@@ -31,7 +31,7 @@ My example code here is very simple. The train.m is the "master" file that borro
   * Execute the actual algorithm/important part
   * Write the data
 
-There are at least two different Matlab Runtime Environments that exist: one that includes "all" of Matlab's functionality and another that has just the "numerics" capability. For my purposes I only needed the numerics, and the only way to get this is to select the "Runtime included in package" option at the top of the compiler window, and then use the installer that includes that runtime in the Docker image (by default it's found in the "for_redistribution" folder and is titled MyAppInstaller_mcr.install).
+There are at least two different Matlab Runtime Environments that exist: one that includes "all" of MATLAB's functionality and another that has just the "numerics" capability. For my purposes I only needed the numerics, and the only way to get this is to select the "Runtime included in package" option at the top of the compiler window, and then use the installer that includes that runtime in the Docker image (by default it's found in the "for_redistribution" folder and is titled MyAppInstaller_mcr.install).
  
   
 # Build your Docker Image
