@@ -18,7 +18,7 @@ Useful resources include:
 For the purpose of this overview, Docker containers are self-contained images that have everything required for executing code, including OS and supporting libraries. Because of this, containers are very portable and can be used for a number of different use cases.
   
   On the backend, AWS does something like:
-  docker run -v /{ml data}:/opt/ml/{something} my_image train
+    docker run -v /{ml data}:/opt/ml/{something} my_image train
   
   The mount command (-v) establishes a connection between the two directories; anything that is on the host {ml data} folder will be available to the container, and any data that gets written to that folder will be available to the host. A very important aspect of how this works within Docker is that it will overwrite anything you have in the /opt/ml/{something} folder, so don't put anything in there that you'll need for execution.
 
