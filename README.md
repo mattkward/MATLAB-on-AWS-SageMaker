@@ -37,7 +37,7 @@ There are at least two different Matlab Runtime Environments that exist: one tha
   
 # Getting your code on AWS
   ## Generate your executable using the Compiler Toolbox, and put it in the right folder
-    -Make sure to include the Runtime in the executable
+  Make sure to include the Runtime in the executable
     
   ## Build your Docker Image
   Make a folder that will have your Dockerfile and install files
@@ -49,29 +49,28 @@ There are at least two different Matlab Runtime Environments that exist: one tha
 ## Upload your image to ECR
   -Tag the image with the repo name you just made
   You need to tag the image with the same name as the repo you just created. Do this by running:
-  >> docker tag <image_name> <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
+      docker tag <image_name> <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
   
-  -Login to AWS through the CLI
+  ### Login to AWS through the CLI
   Run:
-  >> aws ecr get-login --region us-west-1 --no-include-email
+      aws ecr get-login --region us-west-1 --no-include-email
   This will spit out a huge wall of text that's actually a command that establishes a connection to AWS. Copy that output, paste the output back into the terminal, and run the command.
   
-  -Upload the image
+  ### Upload the image
   With the image tagged and AWS connection made, you can upload the image to ECR by running:
   >> docker push <aws ID number>.dkr.ecr.us-west-1.amazonaws.com/<repo name>
   
-  
-  <Heading> Prepare S3
+  # Prepare S3
   S3 is one of AWS's data-storage solutions. This is where our input data lives and where the outputs will get written to. 
   
-  <Heading> Execute your Code
+  # Execute your Code
   There are two ways of doing this through SageMaker: through the web interface for initiating Training Jobs, and through SageMaker's Jupyter Notebooks.
   <subheading> Role
     AWS Manages permissions across their platform through the use of "roles". When you execute a training job on SageMaker with a role, that role needs to have access to the S3 data. 
   
-  <subheading> Web Interface
+  ## Web Interface
     
-  <subheading> Jupyter Notebook
+  ## Jupyter Notebook
   
-  <Heading> Finding the results
+  # Finding the results
   The output of the algorithms are written to the S3 output folder you specify. To get your data, navigate over to the appropriate folder in the S3 bucket you specified when the training job was started.
