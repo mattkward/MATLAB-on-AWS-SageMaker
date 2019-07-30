@@ -33,6 +33,8 @@ My example code here is very simple. The train.m is the "master" file that borro
   * Write the data
 
 There are at least two different Matlab Runtime Environments that exist: one that includes "all" of MATLAB's functionality and another that has just the "numerics" capability. For my purposes I only needed the numerics, and the only way to get this is to select the "Runtime included in package" option at the top of the compiler window, and then use the installer that includes that runtime in the Docker image (by default it's found in the "for_redistribution" folder and is titled MyAppInstaller_mcr.install).
+
+The train.m here calls a very simple function that squares a number, but it could theoretically be any MATLAB function.
  
   
 ## Build your Docker Image
