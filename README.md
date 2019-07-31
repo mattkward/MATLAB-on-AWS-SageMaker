@@ -9,20 +9,29 @@ Software used:
 * Docker
 * AWS Services (AWS Command Line Interface, SageMaker, S3, ECR, etc.?)
 
-Useful resources include:
-AWS bring your own TensorFlow example:
-  https://github.com/awslabs/amazon-sagemaker-examples/tree/master/advanced_functionality/tensorflow_bring_your_own
 
 
-# Docker and AWS
-For the purpose of this overview, Docker containers are self-contained images that have everything required for executing code, including OS and supporting libraries. Because of this, containers are very portable and can be used for a number of different use cases.
-  
-  On the backend, AWS does something like:
-  
-    docker run -v /{ml data}:/opt/ml/ my_image train
-    
-  
-  The mount command (-v) establishes a connection between the two directories; anything that is on the host {ml data} folder will be available to the container, and any data that gets written to that folder will be available to the host. A very important aspect of how this works within Docker is that it will overwrite anything you have in the /opt/ml/ folder, so don't put anything in there that you'll need for execution.
+# SageMaker and Docker
+SageMaker is AWS's Machine Learning platform and uses Jupyter Notebooks and Python. SageMaker has a few different ways of executing code, including Training Jobs and Inferences/Hosting. This guide is covering Training Jobs only but it's likely the code can be altered for Inference and Hosting. Additionally, this is assuming SageMaker's "File" input is used as opposed to "Pipe".
+
+If you don't want to use SageMaker's built-in capabilities and want to execute your own algorithms, you can do this bu packaging your code into a Docker image and uploading it to AWS (specifically, the Elastic Container Registry, or ECR). AWS has multiple examples for doing this in other languages, and can be found here:
+
+https://github.com/awslabs/amazon-sagemaker-examples/tree/master/advanced_functionality
+
+SageMaker makes data available to the running container in the folder structure shown below (which comes from their "Tensorflow Bring Your Own" example):
+
+/opt/ml
+├── input
+│   ├── config
+│   │   ├── hyperparameters.json
+│   │   └── resourceConfig.json
+│   └── data
+│       └── <channel_name>
+│           └── <input data>
+├── model
+│   └── <model files>
+└── output
+    └── failure
 
 # Preparing your code locally
 ## MATLAB Executable
@@ -54,6 +63,16 @@ The train.m here calls a very simple function that squares a number, but it coul
   Something like:
   
       docker build -t image_name .
+
+## Test your Docker Image
+
+On the backend, SageMaker calls your image with something like:
+  
+    docker run -v /{ml data}:/opt/ml/ my_image train
+    
+The mount command (-v) establishes a connection between the two directories; anything that is on the host {ml data} folder will be available to the container, and any data that gets written to that folder will be available to the host. A very important aspect of how this works within Docker is that it will overwrite anything you have in the /opt/ml/ folder, so don't put anything in there that you'll need for execution.
+
+The Docker command up above can be useful for local testing. If you'd like to do this, create a folder on your local drive that has the same folder structure as the 'opt/ml' folder, put your input files into the appropriate input folder on your local drive, then execute the Docker command. If your code runs propery it will write the data to the Model folder; if not it will go to the /output/failure. 
 
 # Getting your code on AWS
   ## Make the repository on ECR 
