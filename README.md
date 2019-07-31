@@ -104,7 +104,7 @@ AWS Manages permissions across their platform through the use of "roles". When y
 
 ![Image of IAM Role with S3 Access](https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/screenshots/iam%20role.JPG)
 
-You can create this role when starting a Training job in the next step.
+You can create this role when starting a Training job in the next step. The safest bet is to make a role that only has access to the S3 bucket that has the necessary data.
   
   ## 5.2 Web Interface
 Setting up your training job through the web interface is fairly straightforward. On the left hand side under Training, select Training Jobs, then the orange "Create training job" button in the top-right. Give your training job a unique name and select the IAM role that has access to S3. For the Algorithm Source, select "Your own algorithm container in ECR", then provide the link ({aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}). For Input mode select File, and for Instance type I used ml.m4.xlarge.
