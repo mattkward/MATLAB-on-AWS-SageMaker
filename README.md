@@ -14,23 +14,34 @@ Software used:
 # SageMaker and Docker
 SageMaker is AWS's Machine Learning platform and uses Jupyter Notebooks and Python. SageMaker has a few different ways of executing code, including Training Jobs and Inferences/Hosting. This guide is covering Training Jobs only but it's likely the code can be altered for Inference and Hosting. Additionally, this is assuming SageMaker's "File" input is used as opposed to "Pipe".
 
-If you don't want to use SageMaker's built-in capabilities and want to execute your own algorithms, you can do this bu packaging your code into a Docker image and uploading it to AWS (specifically, the Elastic Container Registry, or ECR). AWS has multiple examples for doing this in other languages, and can be found here:
+If you don't want to use SageMaker's built-in capabilities and want to execute your own algorithms, you can do this by packaging your code into a Docker image and uploading it to AWS (specifically, the Elastic Container Registry, or ECR). AWS has multiple examples for doing this in other languages, and can be found here:
 
 https://github.com/awslabs/amazon-sagemaker-examples/tree/master/advanced_functionality
 
 SageMaker makes data available to the running container in the folder structure shown below (which comes from their "Tensorflow Bring Your Own" example):
 
 /opt/ml
+
 ├── input
+
 │   ├── config
+
 │   │   ├── hyperparameters.json
+
 │   │   └── resourceConfig.json
+
 │   └── data
+
 │       └── <channel_name>
+
 │           └── <input data>
+
 ├── model
+
 │   └── <model files>
+    
 └── output
+
     └── failure
 
 # Preparing your code locally
