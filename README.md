@@ -19,31 +19,20 @@ If you don't want to use SageMaker's built-in capabilities and want to execute y
 https://github.com/awslabs/amazon-sagemaker-examples/tree/master/advanced_functionality
 
 SageMaker makes data available to the running container in the folder structure shown below (which comes from their "Tensorflow Bring Your Own" example):
-
+~~~
 /opt/ml
-
 ├── input
-
 │   ├── config
-
 │   │   ├── hyperparameters.json
-
 │   │   └── resourceConfig.json
-
 │   └── data
-
 │       └── <channel_name>
-
 │           └── <input data>
-
 ├── model
-
 │   └── <model files>
-    
 └── output
-
     └── failure
-
+~~~
 # Preparing your code locally
 ## MATLAB Executable
 My example code here is very simple. The train.m is the "master" file that borrows heavily from the train.py file in the TensorFlow example, and does the following:
