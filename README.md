@@ -47,22 +47,16 @@ The train.m here calls a very simple function that squares a number, but it coul
  
   
 ## Build your Docker Image
-   ### Generate your executable using the Compiler Toolbox, and put it in the right folder
-  Make sure to include the Runtime in the executable
-  
-  Dockerfiles have all the instructions for creating an Image. The "big" things this Dockerfile needs to do include:
-  * Set MATLAB environment variable
-  * Make the working directory the same as where you copy your executable
-  
-  
+Dockerfiles have all the instructions for creating an image. The only real Matlab-specific command that occurs in this Dockerfile compared to others is ensuring the MATLAB runtime environment variabl is set. Besides that, setting the Working Directory to be the location where *train* is located ensures things are executed appropriately.
 
- 
-    
-  ### Build your Docker Image
-  Make a folder that will have your Dockerfile and install files
-  Something like:
+Assuming you have the Dockerfile in a folder that also has a folder InstallFile/ that has the .install file, you should be able to build the command with:
   
       docker build -t image_name .
+
+Summarizing that all with a screenshot:
+
+![Docker build command](https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/screenshots/docker%20build.JPG)
+
 
 ## Test your Docker Image
 
