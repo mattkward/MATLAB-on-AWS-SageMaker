@@ -51,7 +51,7 @@ Dockerfiles have all the instructions for creating an image. The only real Matla
 
 Assuming you have the Dockerfile in a folder that also has a folder InstallFile/ that has the .install file, you should be able to build the command with:
   
-      docker build -t image_name .
+      docker build -t my_image .
 
 Summarizing that all with a screenshot:
 
@@ -80,7 +80,7 @@ Once the repo is created on ECR and the image is created on your local machine, 
   ### 3.2.1 Tag the image with the repo name you just made
   You need to tag the image with the same name as the repo you just created. Do this by running:
       
-      docker tag image_name {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}
+      docker tag my_image {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}
   
   ### 3.2.2. Login to AWS through the CLI
   In the terminal, run the following command:
@@ -112,6 +112,7 @@ Setting up your training job through the web interface is fairly straightforward
 Since this is a Training job, the Input data configuration should have "train" populated with "train" in the Channel name. I don't know what Record wrapper, S3 data type, or S3 data distribution type are, so I left them at their defaults. S3 location is the location of your data, so make sure to put this in. It should look something like: s3://bucket/path-to-your-input-data/
 
 In the Output data configuration, put the S3 location where you want to write your data, and it should look like: s3://bucket/path-to-your-output-data/
+
 Note: Make sure you include the / at the end of the output folder. I didn't and S3 wouldn't show my data.
 
 Finally, select Create training job to kick it off.
