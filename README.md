@@ -47,7 +47,7 @@ The train.m here calls a very simple function that squares a number, but it coul
  
   
 ## Build your Docker Image
-Dockerfiles have all the instructions for creating an image. The only real Matlab-specific command that occurs in this Dockerfile compared to others is ensuring the MATLAB runtime environment variabl is set. Besides that, setting the Working Directory to be the location where *train* is located ensures things are executed appropriately.
+Dockerfiles have all the instructions for creating an image. The only real Matlab-specific command that occurs in this Dockerfile compared to others is ensuring the MATLAB runtime environment variable is set. Since I'm using R2018b, the folder is /mcr/v95; if you're using a different version you may need to change it to the appropriate one. Besides that, setting the Working Directory to be the location where *train* is located ensures things are executed appropriately.
 
 Assuming you have the Dockerfile in a folder that also has a folder InstallFile/ that has the .install file, you should be able to build the command with:
   
