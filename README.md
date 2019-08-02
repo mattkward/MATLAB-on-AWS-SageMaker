@@ -118,7 +118,7 @@ Setting up your training job through the web interface is fairly straightforward
 ![SageMaker Web Training 1](https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/screenshots/trainWeb1.JPG)
 
 
-Since this is a Training job, the Input data configuration should have "train" populated with "train" in the Channel name. I don't know what Record wrapper, S3 data type, or S3 data distribution type are, so I left them at their defaults. S3 location is the location of your data, so make sure to put this in. It should look something like: s3://bucket/path-to-your-input-data/
+Since this is a Training job, the Input data configuration should have "training" in the Channel name. I don't know what Record wrapper, S3 data type, or S3 data distribution type are, so I left them at their defaults. S3 location is the location of your data, so make sure to put this in. It should look something like: s3://bucket/path-to-your-input-data/
 
 In the Output data configuration, put the S3 location where you want to write your data, and it should look like: s3://bucket/path-to-your-output-data/
 
