@@ -1,6 +1,6 @@
-# MATLAB-on-AWS-SageMaker
+# Overview
 
-This Repo provides an approach for executing MATLAB stand-alone executables on AWS SageMaker. Amazon has a large number of repos of there own that give a more complete overview on their technologies, with this mostly filling the gap for executing MATLAB code on the platform. 
+This Repo provides an approach for executing MATLAB stand-alone executables on AWS SageMaker. Amazon has a large number of repos of there own that give a more complete overview on their technologies, with this mostly filling the gap for executing MATLAB code on the platform.
 
 Software used:
 * Ubuntu
@@ -11,14 +11,23 @@ Software used:
 
 
 
-# 1. SageMaker and Docker
+# 1. SageMaker, Docker, and Folder Structure
 SageMaker is AWS's Machine Learning platform and uses Jupyter Notebooks and Python. SageMaker has a few different ways of executing code, including Training Jobs and Inferences/Hosting. This guide is covering Training Jobs only but it's likely the code can be altered for Inference and Hosting. Additionally, this is assuming SageMaker's "File" input is used as opposed to "Pipe".
 
 If you don't want to use SageMaker's built-in capabilities and want to execute your own algorithms, you can do this by packaging your code into a Docker image and uploading it to AWS (specifically, the Elastic Container Registry, or ECR). AWS has multiple examples for doing this in other languages, and can be found here:
 
 https://github.com/awslabs/amazon-sagemaker-examples/tree/master/advanced_functionality
 
-SageMaker makes data available to the running container in the folder structure shown below (which comes from their "Tensorflow Bring Your Own" example):
+
+# 2. Preparing your code locally
+## MATLAB Executable
+My example code here is very simple. The train.m is the "master" file that borrows heavily from the train.py file in the TensorFlow example, and does the following:
+
+  * Read the data in
+  * Execute the actual algorithm/important part
+  * Write the data
+  
+Reading and Writing the data needs to be done in specific folders that SageMaker uses, with the structure shown below (which comes from their "Tensorflow Bring Your Own" example):
 ~~~
 /opt/ml
 ├── input
@@ -33,13 +42,8 @@ SageMaker makes data available to the running container in the folder structure 
 └── output
     └── failure
 ~~~
-# 2. Preparing your code locally
-## MATLAB Executable
-My example code here is very simple. The train.m is the "master" file that borrows heavily from the train.py file in the TensorFlow example, and does the following:
 
-  * Read the data in
-  * Execute the actual algorithm/important part
-  * Write the data
+The train.m file will thus read in data from /opt/ml/input/data/training/ and write the successful output to /opt/ml/model/. 
 
 There are at least two different Matlab Runtime Environments that exist: one that includes "all" of MATLAB's functionality and another that has just the "numerics" capability. For my purposes I only needed the numerics, and the only way to get this is to select the "Runtime included in package" option at the top of the compiler window, and then use the installer that includes that runtime in the Docker image (by default it's found in the "for_redistribution" folder and is titled MyAppInstaller_mcr.install).
 
@@ -118,6 +122,8 @@ Since this is a Training job, the Input data configuration should have "train" p
 In the Output data configuration, put the S3 location where you want to write your data, and it should look like: s3://bucket/path-to-your-output-data/
 
 *Note: Make sure you include the / at the end of the output folder. I didn't and S3 wouldn't show my data.*
+
+
 
 Finally, select Create training job to kick it off.
 
