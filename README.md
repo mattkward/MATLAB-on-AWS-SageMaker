@@ -115,7 +115,7 @@ You can create this role when starting a Training job in the next step. The safe
   ## 5.2 Web Interface
 Setting up your training job through the web interface is fairly straightforward. On the left hand side under Training, select Training Jobs, then the orange "Create training job" button in the top-right. Give your training job a unique name and select the IAM role that has access to S3. For the Algorithm Source, select "Your own algorithm container in ECR", then provide the link ({aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}). For Input mode select File, and for Instance type I used ml.m4.xlarge.
 
-![SageMaker Web Training 1]()
+![SageMaker Web Training 1](https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/screenshots/trainWeb1.JPG)
 
 
 Since this is a Training job, the Input data configuration should have "train" populated with "train" in the Channel name. I don't know what Record wrapper, S3 data type, or S3 data distribution type are, so I left them at their defaults. S3 location is the location of your data, so make sure to put this in. It should look something like: s3://bucket/path-to-your-input-data/
@@ -124,7 +124,7 @@ In the Output data configuration, put the S3 location where you want to write yo
 
 *Note: Make sure you include the / at the end of the output folder. I didn't and S3 wouldn't show my data.*
 
-![SageMaker Web Training 2]()
+![SageMaker Web Training 2](https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/screenshots/trainWeb2.JPG)
 
 
 Finally, select Create training job to kick it off.
@@ -169,6 +169,6 @@ matlabHelloWorld.fit("s3://{s3 input data bucket}/")
 # 6. Finding the results
 The output of the algorithms are written to the S3 output folder you specify. To get your data, navigate over to the appropriate folder in the S3 bucket you specified when the training job was started.
 
-![S3 Output]()
+![S3 Output](https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/screenshots/s3%20output.JPG)
 
 
