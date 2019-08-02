@@ -43,12 +43,10 @@ Reading and Writing the data needs to be done in specific folders that SageMaker
     └── failure
 ~~~
 
-The train.m file will thus read in data from /opt/ml/input/data/training/ and write the successful output to /opt/ml/model/. 
+The train.m file will thus read in data from /opt/ml/input/data/training/ and write the successful output to /opt/ml/model/. In this example a simple function that squares a number is called from train.m, but it could theoretically be any MATLAB function.
 
 There are at least two different Matlab Runtime Environments that exist: one that includes "all" of MATLAB's functionality and another that has just the "numerics" capability. For my purposes I only needed the numerics, and the only way to get this is to select the "Runtime included in package" option at the top of the compiler window, and then use the installer that includes that runtime in the Docker image (by default it's found in the "for_redistribution" folder and is titled MyAppInstaller_mcr.install).
 
-The train.m here calls a very simple function that squares a number, but it could theoretically be any MATLAB function.
- 
   
 ## Build your Docker Image
 Dockerfiles have all the instructions for creating an image. The only real Matlab-specific command that occurs in this Dockerfile compared to others is ensuring the MATLAB runtime environment variable is set. Since I'm using R2018b, the folder is /mcr/v95; if you're using a different version you may need to change it to the appropriate one. Besides that, setting the Working Directory to be the location where *train* is located ensures things are executed appropriately.
