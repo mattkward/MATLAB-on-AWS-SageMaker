@@ -1,13 +1,13 @@
 # MATLAB-on-AWS-SageMaker
 
-This Repo provides an approach for executing MATLAB stand-alone executables on AWS SageMaker. It borrows heavily from AWS's "Bring Your Own Algorithms", which takes the executable and places it within a Docker image. 
+This Repo provides an approach for executing MATLAB stand-alone executables on AWS SageMaker. Amazon has a large number of repos of there own that give a more complete overview on their technologies, with this mostly filling the gap for executing MATLAB code on the platform. 
 
 Software used:
 * Ubuntu
 * MATLAB 2018b
 * Compiler Toolbox
 * Docker
-* AWS Services (AWS Command Line Interface, SageMaker, S3, ECR, etc.?)
+* AWS Services (AWS Command Line Interface, SageMaker, S3, ECR, etc.)
 
 
 
@@ -95,7 +95,11 @@ Once the repo is created on ECR and the image is created on your local machine, 
     docker push {aws ID number}.dkr.ecr.us-west-1.amazonaws.com/{repo name}
   
 # 4. Prepare S3
-S3 is one of AWS's data-storage solutions. This is where our input data lives and where the outputs will get written to. 
+S3 is one of AWS's data-storage solutions. This is where our input data lives and where the outputs will get written to. Make a bucket, then a folder inside that bucket that has your input data, similar to the below:
+
+![Image of S3 Bucket](https://github.com/mattkward/MATLAB-on-AWS-SageMaker/blob/master/screenshots/s3.JPG)
+
+Additionally, make a folder for your output to be saved to.
   
 # 5. Execute your Code
   There are two ways of doing this through SageMaker: through the web interface for initiating Training Jobs, and through SageMaker's Jupyter Notebooks.
@@ -113,12 +117,12 @@ Since this is a Training job, the Input data configuration should have "train" p
 
 In the Output data configuration, put the S3 location where you want to write your data, and it should look like: s3://bucket/path-to-your-output-data/
 
-Note: Make sure you include the / at the end of the output folder. I didn't and S3 wouldn't show my data.
+*Note: Make sure you include the / at the end of the output folder. I didn't and S3 wouldn't show my data.*
 
 Finally, select Create training job to kick it off.
 
   ## 5.3 Jupyter Notebook
-  The code below is adapted from other AWS examples. Simply update the image string, output path, and input path.
+  The code below is adapted from other AWS examples. Simply update the image string, output path, and input path. 
   
 ``` 
 
